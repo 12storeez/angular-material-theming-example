@@ -1,0 +1,11 @@
+<mat-expansion-panel class="mat-elevation-z">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <ng-content select="[title]"></ng-content>
+    </mat-panel-title>
+    <mat-panel-description>
+      <ng-content select="[description]"></ng-content>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <ng-content select="[innerContent]"></ng-content>
+</mat-expansion-panel>

@@ -11,9 +11,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { AccordionItemComponent } from './accordion/accordion-item.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
-  declarations: [AppComponent, SidenavComponent],
+  declarations: [AppComponent, SidenavComponent, AccordionItemComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -24,6 +26,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatExpansionModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
