@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, tap } from 'rxjs/operators';
+import { SidenavService } from './sidebar.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -13,8 +14,27 @@ export class SidenavComponent {
     .observe(Breakpoints.Handset)
     .pipe(
       map((result) => result.matches),
-      shareReplay()
+      shareReplay(),
+      tap((state) => {
+        this.show();
+      })
     );
+  opened$ = this.sidenavService.visible$;
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  show() {
+    this.sidenavService.show();
+  }
+
+  hide() {
+    this.sidenavService.hide();
+  }
+
+  toggleVisibility() {
+    this.sidenavService.toggleVisibility();
+  }
+
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private sidenavService: SidenavService
+  ) {}
 }
