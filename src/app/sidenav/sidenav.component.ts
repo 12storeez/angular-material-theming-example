@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators';
 import { SidenavService } from './sidenav.service';
 import { animations } from './sidenav.animations';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-sidenav',
@@ -23,7 +24,7 @@ export class SidenavComponent {
       map((result) => result.matches),
       shareReplay()
     );
-  opened$ = this.sidenavService.visible$;
+  visible$ = this.sidenavService.visible$;
   mini$ = this.sidenavService.mini$;
   options = [
     {
@@ -39,6 +40,7 @@ export class SidenavComponent {
       onClick: () => {},
     },
   ];
+  @ViewChild('sidenav', { static: true }) sidenav!: MatSidenav;
 
   show() {
     this.sidenavService.show();
@@ -58,6 +60,22 @@ export class SidenavComponent {
 
   setAnimation() {
     return this.mini$.getValue() ? 'sidenav-mini' : 'sidenav-big';
+  }
+  ngOnInit() {
+    this.setSidenavGap(innerWidth);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.setSidenavGap((<Window>event?.target)?.innerWidth);
+  }
+
+  setSidenavGap(innerWidth: number) {
+    if (innerWidth <= 599) {
+      this.sidenav.fixedTopGap = 56;
+    } else {
+      this.sidenav.fixedTopGap = 64;
+    }
   }
 
   constructor(

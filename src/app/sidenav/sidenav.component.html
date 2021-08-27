@@ -1,13 +1,27 @@
+<mat-toolbar color="primary">
+  <button
+    type="button"
+    aria-label="Toggle sidenav"
+    mat-icon-button
+    (click)="toggleVisibility()"
+    *ngIf="isHandset$ | async"
+  >
+    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+  </button>
+
+  <span>mat-ui</span>
+</mat-toolbar>
 <mat-sidenav-container (backdropClick)="hide()" class="sidenav-container">
   <mat-sidenav
     [@sidenav-size]="setAnimation()"
-    #drawer
+    #sidenav
     disableClose
     class="sidenav"
     fixedInViewport
+    fixedTopGap
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="opened$ | async"
+    [opened]="visible$ | async"
   >
     <mat-toolbar>
       <button title="Minimize menu" mat-icon-button (click)="toggleSize()">
