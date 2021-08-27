@@ -1,11 +1,25 @@
-<mat-expansion-panel class="mat-elevation-z">
+<mat-expansion-panel id="panel" #panel class="mat-elevation-z">
   <mat-expansion-panel-header>
     <mat-panel-title>
-      <ng-content select="[title]"></ng-content>
+      <!-- TITLE_CONTENT:START -->
+      <mat-icon
+        *ngIf="iconName"
+        aria-hidden="false"
+        aria-label="toggle menu icon"
+        >{{ iconName }}</mat-icon
+      >
+      <span style="margin-left: 16px">
+        {{ title }}
+      </span>
+      <!-- TITLE_CONTENT:END -->
     </mat-panel-title>
     <mat-panel-description>
-      <ng-content select="[description]"></ng-content>
+      <!-- DESCRIPTION_CONTENT:START -->
+      {{ description }}
+      <!-- DESCRIPTION_CONTENT:START -->
     </mat-panel-description>
   </mat-expansion-panel-header>
-  <ng-content select="[innerContent]"></ng-content>
+  <ng-template matExpansionPanelContent>
+    <div>hello</div>
+  </ng-template>
 </mat-expansion-panel>
