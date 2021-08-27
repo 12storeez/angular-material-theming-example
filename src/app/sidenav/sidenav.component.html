@@ -1,19 +1,32 @@
 <mat-toolbar color="primary">
   <button
-    type="button"
+    title="Toggle sidenav"
     aria-label="Toggle sidenav"
     mat-icon-button
+    *ngIf="isHandset$ | async; else desktopButton"
     (click)="toggleVisibility()"
-    *ngIf="isHandset$ | async"
   >
     <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
+
+  <ng-template #desktopButton>
+    <button
+      title="Minimize menu"
+      aria-label="Minimize menu"
+      mat-icon-button
+      (click)="toggleSize()"
+    >
+      <mat-icon aria-hidden="false" aria-label="toggle menu icon"
+        >{{ (mini$ | async) ? "menu" : "close" }}
+      </mat-icon>
+    </button>
+  </ng-template>
 
   <span>mat-ui</span>
 </mat-toolbar>
 <mat-sidenav-container (backdropClick)="hide()" class="sidenav-container">
   <mat-sidenav
-    [@sidenav-size]="setAnimation()"
+    [@sidenav-size]="(isHandset$ | async) ? 'sidenav-over' : setAnimation()"
     #sidenav
     disableClose
     class="sidenav"
@@ -23,14 +36,6 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="visible$ | async"
   >
-    <mat-toolbar>
-      <button title="Minimize menu" mat-icon-button (click)="toggleSize()">
-        <mat-icon aria-hidden="false" aria-label="toggle menu icon">{{
-          (mini$ | async) ? "menu" : "close"
-        }}</mat-icon>
-      </button>
-    </mat-toolbar>
-
     <mat-nav-list>
       <ng-container *ngIf="mini$ | async; else hugeList">
         <a
@@ -59,22 +64,9 @@
     </mat-nav-list>
   </mat-sidenav>
 
-  <mat-sidenav-content [@content-margin]="setAnimation()">
-    <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="toggleVisibility()"
-        *ngIf="isHandset$ | async"
-        title="Hide menu"
-      >
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-
-      <span>mat-ui</span>
-    </mat-toolbar>
-
+  <mat-sidenav-content
+    [@content-margin]="(isHandset$ | async) ? 'sidenav-over' : setAnimation()"
+  >
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>

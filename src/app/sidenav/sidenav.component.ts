@@ -16,12 +16,12 @@ export class SidenavComponent {
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
-      tap((state) => {
-        console.log(Breakpoints.Handset);
-        console.log(state);
-        this.show();
-      }),
       map((result) => result.matches),
+      tap((state) => {
+        this.show();
+        this.increase();
+        this.setSidenavGap(state);
+      }),
       shareReplay()
     );
   visible$ = this.sidenavService.visible$;
@@ -40,6 +40,7 @@ export class SidenavComponent {
       onClick: () => {},
     },
   ];
+
   @ViewChild('sidenav', { static: true }) sidenav!: MatSidenav;
 
   show() {
@@ -48,6 +49,10 @@ export class SidenavComponent {
 
   hide() {
     this.sidenavService.hide();
+  }
+
+  increase() {
+    this.sidenavService.increase();
   }
 
   toggleVisibility() {
@@ -59,19 +64,11 @@ export class SidenavComponent {
   }
 
   setAnimation() {
-    return this.mini$.getValue() ? 'sidenav-mini' : 'sidenav-big';
-  }
-  ngOnInit() {
-    this.setSidenavGap(innerWidth);
+    return this.mini$.getValue() ? 'sidenav-mini' : 'sidenav-huge';
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event) {
-    this.setSidenavGap((<Window>event?.target)?.innerWidth);
-  }
-
-  setSidenavGap(innerWidth: number) {
-    if (innerWidth <= 599) {
+  setSidenavGap(isHandset: boolean) {
+    if (isHandset) {
       this.sidenav.fixedTopGap = 56;
     } else {
       this.sidenav.fixedTopGap = 64;

@@ -14,6 +14,14 @@ export class SidenavService {
     this.visible$.next(false);
   }
 
+  increase() {
+    this.mini$.next(false);
+  }
+
+  decrease() {
+    this.mini$.next(true);
+  }
+
   toggleVisibility() {
     this.visible$.next(!this.visible$.getValue());
   }

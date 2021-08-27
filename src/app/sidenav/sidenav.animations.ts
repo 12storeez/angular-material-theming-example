@@ -1,43 +1,47 @@
 import {
   animate,
-  keyframes,
   state,
   style,
   transition,
   trigger,
 } from '@angular/animations';
 
+const SIDENAV_HUGE_SIZE = '280px';
+const SIDENAV_MINI_SIZE = '80px';
+
 export const animations = [
   trigger('sidenav-size', [
     state(
-      'sidenav-big',
+      'sidenav-huge',
       style({
-        width: '280px',
+        width: SIDENAV_HUGE_SIZE,
       })
     ),
     state(
       'sidenav-mini',
       style({
-        width: '80px',
+        width: SIDENAV_MINI_SIZE,
       })
     ),
-    transition('sidenav-mini <=> sidenav-big', [animate('0.1s')]),
+    state('sidenav-over', style({ width: SIDENAV_HUGE_SIZE })),
+    transition('sidenav-mini <=> sidenav-huge', [animate('0.1s')]),
   ]),
 
   trigger('content-margin', [
     state(
-      'sidenav-big',
+      'sidenav-huge',
       style({
-        marginLeft: '280px',
+        marginLeft: SIDENAV_HUGE_SIZE,
       })
     ),
     state(
       'sidenav-mini',
       style({
-        marginLeft: '80px',
+        marginLeft: SIDENAV_MINI_SIZE,
       })
     ),
-    transition('sidenav-mini <=> sidenav-big', [animate('0.1s')]),
+    state('sidenav-over', style({ marginLeft: 0 })),
+    transition('sidenav-mini <=> sidenav-huge', [animate('0.1s')]),
   ]),
 
   trigger('list-accordion-opacity', [
