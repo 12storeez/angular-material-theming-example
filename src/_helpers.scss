@@ -1,0 +1,241 @@
+@use 'sass:map';
+@use 'sass:meta';
+
+/// Merges background or foreground with theme
+/// @param {Map} $theme The theme map returned from `define-light-theme` or `define-dark-theme`.
+/// @param {String} $property-name `background` | 'foreground`
+/// @param {Map} $settings Map with new settings to override
+///   Check available settings inside node_modules/@angular/material/core/theming/_palette.scss
+/// @returns {Map} Theme.
+///
+/// https://github.com/angular/components/issues/6244%20
+/// https://stackoverflow.com/questions/43919927/angular-material2-theming-how-to-set-app-background
+///
+/// Usage:
+///
+/// $light-theme: mat.define-light-theme(
+///   (
+///     color: (
+///       primary: $light-primary,
+///       accent: $light-accent,
+///       warn: $light-warn,
+///     ),
+///   )
+/// );
+///
+/// $light-theme: helpers.set-ground(
+///   $light-theme,
+///   "foreground",
+///   (
+///     text: red,
+///   )
+/// );
+/// $light-theme: helpers.set-ground(
+///   $light-theme,
+///   "background",
+///   (
+///     background: blue,
+///   )
+/// );
+///
+@function set-ground($theme, $property-name, $settings) {
+  $custom-ground: map.get($theme, $property-name);
+  $custom-ground: map.merge($custom-ground, $settings);
+  $theme-color: map.get($theme, color);
+
+  @if $property-name == "foreground" {
+    $theme: map.merge(
+      $theme,
+      (
+        color:
+          map.merge(
+            $theme-color,
+            (
+              foreground: $custom-ground,
+            )
+          ),
+      )
+    );
+
+    $theme: map.merge(
+      $theme,
+      (
+        foreground: $custom-ground,
+      )
+    );
+    @return $theme;
+  }
+  @if $property-name == "background" {
+    $theme: map.merge(
+      $theme,
+      (
+        color:
+          map.merge(
+            $theme-color,
+            (
+              background: $custom-ground,
+            )
+          ),
+      )
+    );
+
+    $theme: map.merge(
+      $theme,
+      (
+        background: $custom-ground,
+      )
+    );
+    @return $theme;
+  }
+
+  @return $theme;
+}
+
+// $_example: (
+//   color: (
+//     primary: (
+//       100: #dbd7d2,
+//       500: #a89583,
+//       700: #887569,
+//       contrast: (
+//         100: #887569,
+//         500: blue,
+//         700: #dbd7d2,
+//       ),
+//       default: #a89583,
+//       lighter: #dbd7d2,
+//       darker: #887569,
+//       text: #a89583,
+//       default-contrast: blue,
+//       lighter-contrast: #887569,
+//       darker-contrast: #dbd7d2,
+//       "100-contrast": #887569,
+//       "500-contrast": blue,
+//       "700-contrast": #dbd7d2,
+//       "contrast-contrast": null,
+//     ),
+//     accent: (
+//       100: #d2dbd5,
+//       500: #83a891,
+//       700: #698874,
+//       contrast: (
+//         100: #698874,
+//         500: green,
+//         700: #d2dbd5,
+//       ),
+//       default: #83a891,
+//       lighter: #d2dbd5,
+//       darker: #698874,
+//       text: #83a891,
+//       default-contrast: green,
+//       lighter-contrast: #698874,
+//       darker-contrast: #d2dbd5,
+//       "100-contrast": #698874,
+//       "500-contrast": green,
+//       "700-contrast": #d2dbd5,
+//       "contrast-contrast": null,
+//     ),
+//     warn: (
+//       100: #ffd7d7,
+//       500: #ffaaaa,
+//       700: #de6262,
+//       contrast: (
+//         100: #de6262,
+//         500: green,
+//         700: #ffd7d7,
+//       ),
+//       default: #ffaaaa,
+//       lighter: #ffd7d7,
+//       darker: #de6262,
+//       text: #ffaaaa,
+//       default-contrast: green,
+//       lighter-contrast: #de6262,
+//       darker-contrast: #ffd7d7,
+//       "100-contrast": #de6262,
+//       "500-contrast": green,
+//       "700-contrast": #ffd7d7,
+//       "contrast-contrast": null,
+//     ),
+//     is-dark: false,
+//     foreground: (
+//       /* ... */
+//       text: red,
+//     ),
+//     background: (
+//       /* ... */
+//       background: #fafafa,
+//     ),
+//   ),
+//   primary: (
+//     100: #dbd7d2,
+//     500: #a89583,
+//     700: #887569,
+//     contrast: (
+//       100: #887569,
+//       500: blue,
+//       700: #dbd7d2,
+//     ),
+//     default: #a89583,
+//     lighter: #dbd7d2,
+//     darker: #887569,
+//     text: #a89583,
+//     default-contrast: blue,
+//     lighter-contrast: #887569,
+//     darker-contrast: #dbd7d2,
+//     "100-contrast": #887569,
+//     "500-contrast": blue,
+//     "700-contrast": #dbd7d2,
+//     "contrast-contrast": null,
+//   ),
+//   accent: (
+//     100: #d2dbd5,
+//     500: #83a891,
+//     700: #698874,
+//     contrast: (
+//       100: #698874,
+//       500: green,
+//       700: #d2dbd5,
+//     ),
+//     default: #83a891,
+//     lighter: #d2dbd5,
+//     darker: #698874,
+//     text: #83a891,
+//     default-contrast: green,
+//     lighter-contrast: #698874,
+//     darker-contrast: #d2dbd5,
+//     "100-contrast": #698874,
+//     "500-contrast": green,
+//     "700-contrast": #d2dbd5,
+//     "contrast-contrast": null,
+//   ),
+//   warn: (
+//     100: #ffd7d7,
+//     500: #ffaaaa,
+//     700: #de6262,
+//     contrast: (
+//       100: #de6262,
+//       500: green,
+//       700: #ffd7d7,
+//     ),
+//     default: #ffaaaa,
+//     lighter: #ffd7d7,
+//     darker: #de6262,
+//     text: #ffaaaa,
+//     default-contrast: green,
+//     lighter-contrast: #de6262,
+//     darker-contrast: #ffd7d7,
+//     "100-contrast": #de6262,
+//     "500-contrast": green,
+//     "700-contrast": #ffd7d7,
+//     "contrast-contrast": null,
+//   ),
+//   is-dark: false,
+//   foreground: (
+//     /* ... */
+//     text: red,
+//   ),
+//   background: (
+//     /* ... */
+//     background: #fafafa,
+//   ),
+// );

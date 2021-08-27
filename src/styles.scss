@@ -1,6 +1,7 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '~@angular/material' as mat;
+@use './helpers' as helpers;
 // Plus imports for other components in your app.
 
 // relocated from index.html
@@ -48,6 +49,9 @@ $_wms-light-warn-pallette: (
     700: #ffd7d7,
   ),
 );
+
+$wms-light-typo-primary: #887569;
+
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker hue.
 // Default hues: 500, 100, 700
@@ -67,6 +71,15 @@ $wms-light-theme: mat.define-light-theme(
     ),
   )
 );
+
+$wms-light-theme: helpers.set-ground(
+  $wms-light-theme,
+  "foreground",
+  (
+    text: $wms-light-typo-primary,
+  )
+);
+
 $wms-dark-theme: mat.define-dark-theme(
   (
     color: (
@@ -80,7 +93,10 @@ $wms-dark-theme: mat.define-dark-theme(
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.all-component-themes($wms-light-theme);
+
+html:not([theme="dark"]) {
+  @include mat.all-component-themes($wms-light-theme);
+}
 
 html[theme="dark"] {
   @include mat.all-component-themes($wms-dark-theme);
