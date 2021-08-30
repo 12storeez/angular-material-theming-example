@@ -39,54 +39,23 @@
 /// );
 ///
 @function set-ground($theme, $property-name, $settings) {
+  @if $property-name != "foreground" and $property-name != "background" {
+    @return $theme;
+  }
+
   $custom-ground: map.get($theme, $property-name);
   $custom-ground: map.merge($custom-ground, $settings);
   $theme-color: map.get($theme, color);
 
-  @if $property-name == "foreground" {
-    $theme: map.merge(
-      $theme,
-      (
-        color:
-          map.merge(
-            $theme-color,
-            (
-              foreground: $custom-ground,
-            )
-          ),
-      )
-    );
+  $color: map.merge($theme-color, (#{$property-name}: $custom-ground));
+  $theme: map.merge(
+    $theme,
+    (
+      color: $color,
+    )
+  );
 
-    $theme: map.merge(
-      $theme,
-      (
-        foreground: $custom-ground,
-      )
-    );
-    @return $theme;
-  }
-  @if $property-name == "background" {
-    $theme: map.merge(
-      $theme,
-      (
-        color:
-          map.merge(
-            $theme-color,
-            (
-              background: $custom-ground,
-            )
-          ),
-      )
-    );
-
-    $theme: map.merge(
-      $theme,
-      (
-        background: $custom-ground,
-      )
-    );
-    @return $theme;
-  }
+  $theme: map.merge($theme, (#{$property-name}: $custom-ground));
 
   @return $theme;
 }
