@@ -1,10 +1,10 @@
-import { Component, HostListener, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators';
 import { SidenavService } from './sidenav.service';
 import { animations } from './sidenav.animations';
-import { MatSidenav } from '@angular/material/sidenav';
+import { MatSidenav, MatSidenavContent } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-sidenav',
@@ -42,6 +42,8 @@ export class SidenavComponent {
   ];
 
   @ViewChild('sidenav', { static: true }) sidenav!: MatSidenav;
+  @ViewChild('sidenavContent', { static: true })
+  sidenavContent!: MatSidenavContent;
 
   show() {
     this.sidenavService.show();
@@ -68,10 +70,14 @@ export class SidenavComponent {
   }
 
   setSidenavGap(isHandset: boolean) {
+    const sidenavContentEl = this.sidenavContent.getElementRef().nativeElement;
+
     if (isHandset) {
       this.sidenav.fixedTopGap = 56;
+      sidenavContentEl.style.marginTop = '56px';
     } else {
       this.sidenav.fixedTopGap = 64;
+      sidenavContentEl.style.marginTop = '64px';
     }
   }
 

@@ -66,6 +66,7 @@
 
   <mat-sidenav-content
     [@content-margin]="(isHandset$ | async) ? 'sidenav-over' : setAnimation()"
+    #sidenavContent
   >
     <ng-content></ng-content>
   </mat-sidenav-content>

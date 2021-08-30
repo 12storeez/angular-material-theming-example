@@ -2,20 +2,8 @@
   height: 100%;
 }
 
-.sidenav {
-  padding: 0;
-}
-
-.sidenav .mat-toolbar {
-  background: inherit;
-}
-
 .mat-toolbar.mat-primary {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 1;
-}
-
-.mat-list-item-content {
-  padding: 0 24px;
+  z-index: 2;
 }
