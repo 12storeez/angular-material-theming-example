@@ -3,16 +3,17 @@
 
 $dark-primary-text: rgba(black, 0.87);
 $light-primary-text: white;
+$wms-light-primary-text: #887569;
 
 // Creating custom palettes
 $_wms-light-primary-palette: (
-  100: #dbd7d2,
+  100: #baafa9,
   500: #a89583,
   700: #887569,
   contrast: (
     100: #887569,
     500: $light-primary-text,
-    700: #dbd7d2,
+    700: #baafa9,
   ),
 );
 
@@ -29,16 +30,14 @@ $_wms-light-accent-palette: (
 
 $_wms-light-warn-palette: (
   100: #ffd7d7,
-  500: #ffaaaa,
-  700: #de6262,
+  500: #a54545,
+  700: #8d0624,
   contrast: (
-    100: #de6262,
+    100: #8d0624,
     500: $dark-primary-text,
     700: #ffd7d7,
   ),
 );
-
-$wms-light-typo-primary: #887569;
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker hue.
@@ -64,7 +63,7 @@ $light-theme: helpers.set-ground(
   $light-theme,
   "foreground",
   (
-    text: $wms-light-typo-primary,
+    text: $wms-light-primary-text,
   )
 );
 

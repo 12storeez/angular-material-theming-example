@@ -1,11 +1,11 @@
 @mixin inside-light-theme {
-  html:not([theme="dark"]) {
+  body.light-theme {
     @content;
   }
 }
 
 @mixin inside-dark-theme {
-  html[theme="dark"] {
+  body.dark-theme {
     @content;
   }
 }
