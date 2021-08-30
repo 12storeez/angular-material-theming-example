@@ -1,5 +1,28 @@
-.sidenav-container {
-  height: 100%;
+@use 'sass:map';
+@use '~@angular/material' as mat;
+@use '~@angular/material/core/theming/theming';
+
+@use '../../mixins' as mixins;
+@use '../../helpers' as helpers;
+@use '../../theming' as custom-theming;
+
+$dark-config: theming.get-color-config(custom-theming.$dark-theme);
+$light-config: theming.get-color-config(custom-theming.$light-theme);
+
+@include mixins.inside-light-theme {
+  $primary: map.get($light-config, primary);
+
+  .mat-drawer {
+    background-color: map.get($primary, 100);
+  }
+}
+
+@include mixins.inside-dark-theme {
+  $primary: map.get($dark-config, primary);
+
+  .mat-drawer {
+    background-color: map.get($primary, 700);
+  }
 }
 
 .mat-toolbar.mat-primary {
@@ -7,3 +30,9 @@
   top: 0;
   z-index: 2;
 }
+
+.sidenav-container {
+  height: 100%;
+}
+
+// @include colors(theming.get-color-config($config-or-theme));

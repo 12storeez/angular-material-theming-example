@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators';
@@ -11,6 +11,7 @@ import { MatSidenav, MatSidenavContent } from '@angular/material/sidenav';
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss'],
   animations,
+  encapsulation: ViewEncapsulation.None,
 })
 export class SidenavComponent {
   isHandset$: Observable<boolean> = this.breakpointObserver
