@@ -31,6 +31,9 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+* {
+  box-sizing: border-box;
+}
 
 // relocated from index.html
 @import url("https://fonts.gstatic.com");

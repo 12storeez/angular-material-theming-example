@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 export class SidenavService {
   visible$ = new BehaviorSubject(true);
   mini$ = new BehaviorSubject(false);
+  fixedTopGap$ = new BehaviorSubject(64);
 
   show() {
     this.visible$.next(true);

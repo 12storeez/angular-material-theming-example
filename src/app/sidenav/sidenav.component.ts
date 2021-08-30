@@ -27,6 +27,7 @@ export class SidenavComponent {
     );
   visible$ = this.sidenavService.visible$;
   mini$ = this.sidenavService.mini$;
+  fixedTopGap$ = this.sidenavService.fixedTopGap$;
   options = [
     {
       name: 'Интеграция',
@@ -71,15 +72,7 @@ export class SidenavComponent {
   }
 
   setSidenavGap(isHandset: boolean) {
-    const sidenavContentEl = this.sidenavContent.getElementRef().nativeElement;
-
-    if (isHandset) {
-      this.sidenav.fixedTopGap = 56;
-      sidenavContentEl.style.marginTop = '56px';
-    } else {
-      this.sidenav.fixedTopGap = 64;
-      sidenavContentEl.style.marginTop = '64px';
-    }
+    this.fixedTopGap$.next(isHandset ? 56 : 64);
   }
 
   constructor(

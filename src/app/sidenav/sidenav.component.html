@@ -31,7 +31,7 @@
     disableClose
     class="sidenav"
     fixedInViewport
-    fixedTopGap
+    [fixedTopGap]="fixedTopGap$ | async"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="visible$ | async"
@@ -67,6 +67,12 @@
   <mat-sidenav-content
     [@content-margin]="(isHandset$ | async) ? 'sidenav-over' : setAnimation()"
     #sidenavContent
+    *ngIf="fixedTopGap$ | async as fixedTopGap"
+    [style]="{
+      height: 'calc(100vh - ' + fixedTopGap + 'px)',
+      marginTop: fixedTopGap + 'px',
+      padding: fixedTopGap / 4 + 'px'
+    }"
   >
     <ng-content></ng-content>
   </mat-sidenav-content>
