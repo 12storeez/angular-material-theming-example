@@ -2,6 +2,7 @@
 // For more information: https://material.angular.io/guide/theming
 @use '~@angular/material' as mat;
 @use './theming' as custom-theming;
+@use './mixins' as mixins;
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -13,11 +14,11 @@
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 
-html:not([theme="dark"]) {
+@include mixins.inside-light-theme {
   @include mat.all-component-themes(custom-theming.$light-theme);
 }
 
-html[theme="dark"] {
+@include mixins.inside-dark-theme {
   @include mat.all-component-themes(custom-theming.$dark-theme);
 }
 
