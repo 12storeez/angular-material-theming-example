@@ -13,9 +13,13 @@ import { MatListModule } from '@angular/material/list';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { AccordionItemComponent } from './accordion/accordion-item.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { TableComponent } from './table/table.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
-  declarations: [AppComponent, SidenavComponent, AccordionItemComponent],
+  declarations: [AppComponent, SidenavComponent, AccordionItemComponent, TableComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,6 +31,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatIconModule,
     MatListModule,
     MatExpansionModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
