@@ -13,7 +13,7 @@ $light-config: theming.get-color-config(custom-theming.$light-theme);
   $primary: map.get($light-config, primary);
 
   .mat-drawer {
-    background-color: map.get($primary, 100);
+    background-color: map.get($primary, 700);
   }
 }
 
@@ -26,6 +26,8 @@ $light-config: theming.get-color-config(custom-theming.$light-theme);
 }
 
 .mat-toolbar.mat-primary {
+  align-items: center;
+  justify-content: space-between;
   position: fixed;
   top: 0;
   z-index: 2;

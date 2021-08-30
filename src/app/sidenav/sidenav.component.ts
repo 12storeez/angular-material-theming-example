@@ -5,6 +5,7 @@ import { map, shareReplay, tap } from 'rxjs/operators';
 import { SidenavService } from './sidenav.service';
 import { animations } from './sidenav.animations';
 import { MatSidenav, MatSidenavContent } from '@angular/material/sidenav';
+import { ThemeService } from '../theme/theme.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -42,6 +43,7 @@ export class SidenavComponent {
       onClick: () => {},
     },
   ];
+  isDark$ = this.themeService.isDark$;
 
   @ViewChild('sidenav', { static: true }) sidenav!: MatSidenav;
   @ViewChild('sidenavContent', { static: true })
@@ -75,8 +77,13 @@ export class SidenavComponent {
     this.fixedTopGap$.next(isHandset ? 56 : 64);
   }
 
+  toggleTheme() {
+    this.themeService.toggle();
+  }
+
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private sidenavService: SidenavService
+    private sidenavService: SidenavService,
+    private themeService: ThemeService
   ) {}
 }
