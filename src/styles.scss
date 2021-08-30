@@ -1,105 +1,24 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '~@angular/material' as mat;
-@use './helpers' as helpers;
+@use './theming' as custom-theming;
 // Plus imports for other components in your app.
-
-// relocated from index.html
-@import url("https://fonts.gstatic.com");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
 @include mat.core();
 
-$dark-primary-text: rgba(black, 0.87);
-$light-primary-text: white;
-
-$_wms-light-primary-pallette: (
-  100: #dbd7d2,
-  500: #a89583,
-  700: #887569,
-  contrast: (
-    100: #887569,
-    500: $light-primary-text,
-    700: #dbd7d2,
-  ),
-);
-
-$_wms-light-accent-pallette: (
-  100: #d2dbd5,
-  500: #83a891,
-  700: #698874,
-  contrast: (
-    100: #698874,
-    500: $dark-primary-text,
-    700: #d2dbd5,
-  ),
-);
-
-$_wms-light-warn-pallette: (
-  100: #ffd7d7,
-  500: #ffaaaa,
-  700: #de6262,
-  contrast: (
-    100: #de6262,
-    500: $dark-primary-text,
-    700: #ffd7d7,
-  ),
-);
-
-$wms-light-typo-primary: #887569;
-
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker hue.
-// Default hues: 500, 100, 700
-$wms-light-primary: mat.define-palette($_wms-light-primary-pallette);
-$wms-light-accent: mat.define-palette($_wms-light-accent-pallette);
-// The warn palette is optional (defaults to red).
-$wms-light-warn: mat.define-palette($_wms-light-warn-pallette);
-
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$wms-light-theme: mat.define-light-theme(
-  (
-    color: (
-      primary: $wms-light-primary,
-      accent: $wms-light-accent,
-      warn: $wms-light-warn,
-    ),
-  )
-);
-
-$wms-light-theme: helpers.set-ground(
-  $wms-light-theme,
-  "foreground",
-  (
-    text: $wms-light-typo-primary,
-  )
-);
-
-$wms-dark-theme: mat.define-dark-theme(
-  (
-    color: (
-      primary: $wms-light-primary,
-      accent: $wms-light-accent,
-      warn: $wms-light-warn,
-    ),
-  )
-);
-
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 
 html:not([theme="dark"]) {
-  @include mat.all-component-themes($wms-light-theme);
+  @include mat.all-component-themes(custom-theming.$light-theme);
 }
 
 html[theme="dark"] {
-  @include mat.all-component-themes($wms-dark-theme);
+  @include mat.all-component-themes(custom-theming.$dark-theme);
 }
 
 /* You can add global styles to this file, and also import other style files */
@@ -111,3 +30,8 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+// relocated from index.html
+@import url("https://fonts.gstatic.com");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");

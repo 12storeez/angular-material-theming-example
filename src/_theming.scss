@@ -1,0 +1,79 @@
+@use '~@angular/material' as mat;
+@use './helpers' as helpers;
+
+$dark-primary-text: rgba(black, 0.87);
+$light-primary-text: white;
+
+// Creating custom palettes
+$_wms-light-primary-palette: (
+  100: #dbd7d2,
+  500: #a89583,
+  700: #887569,
+  contrast: (
+    100: #887569,
+    500: $light-primary-text,
+    700: #dbd7d2,
+  ),
+);
+
+$_wms-light-accent-palette: (
+  100: #d2dbd5,
+  500: #83a891,
+  700: #698874,
+  contrast: (
+    100: #698874,
+    500: $dark-primary-text,
+    700: #d2dbd5,
+  ),
+);
+
+$_wms-light-warn-palette: (
+  100: #ffd7d7,
+  500: #ffaaaa,
+  700: #de6262,
+  contrast: (
+    100: #de6262,
+    500: $dark-primary-text,
+    700: #ffd7d7,
+  ),
+);
+
+$wms-light-typo-primary: #887569;
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker hue.
+// Default hues: 500, 100, 700
+$wms-light-primary: mat.define-palette($_wms-light-primary-palette);
+$wms-light-accent: mat.define-palette($_wms-light-accent-palette);
+// The warn palette is optional (defaults to red).
+$wms-light-warn: mat.define-palette($_wms-light-warn-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$light-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $wms-light-primary,
+      accent: $wms-light-accent,
+      warn: $wms-light-warn,
+    ),
+  )
+);
+
+$light-theme: helpers.set-ground(
+  $light-theme,
+  "foreground",
+  (
+    text: $wms-light-typo-primary,
+  )
+);
+
+$dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $wms-light-primary,
+      accent: $wms-light-accent,
+      warn: $wms-light-warn,
+    ),
+  )
+);
