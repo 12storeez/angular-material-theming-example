@@ -4,13 +4,7 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
   selector: 'app-accordion-item',
   templateUrl: './accordion-item.component.html',
   encapsulation: ViewEncapsulation.None,
-  styles: [
-    `
-      .ng-animating #panel .mat-expansion-panel-content {
-        display: none !important;
-      }
-    `,
-  ],
+  styleUrls: ['./accordion-item.component.scss'],
 })
 
 /**

@@ -1,0 +1,52 @@
+@use 'sass:map';
+@use '~@angular/material' as mat;
+@use '~@angular/material/core/theming/theming';
+
+@use '../../mixins' as mixins;
+@use '../../helpers' as helpers;
+@use '../../theming' as custom-theming;
+
+$dark-config: theming.get-color-config(custom-theming.$dark-theme);
+$light-config: theming.get-color-config(custom-theming.$light-theme);
+
+@include mixins.inside-light-theme {
+  $primary: map.get($light-config, primary);
+  $foreground: map.get($dark-config, foreground);
+  $background: map.get($dark-config, background);
+
+  .mat-expansion-panel {
+    background: map.get($primary, 700);
+  }
+  .mat-expansion-panel-header-title,
+  .mat-expansion-indicator::after,
+  .mat-expansion-panel-body,
+  .mat-list-base .mat-list-item {
+    color: map.get($foreground, text);
+  }
+}
+
+@include mixins.inside-dark-theme {
+  $primary: map.get($dark-config, primary);
+  $foreground: map.get($dark-config, foreground);
+  $background: map.get($dark-config, background);
+
+  .mat-expansion-panel {
+    background: map.get($primary, 700);
+  }
+
+  .mat-expansion-panel-header-title,
+  .mat-expansion-indicator::after,
+  .mat-expansion-panel-body,
+  .mat-list-base .mat-list-item {
+    color: map.get($foreground, text);
+  }
+}
+
+.mat-list-item-content {
+  justify-content: center;
+}
+
+// Bugfix
+.ng-animating #panel .mat-expansion-panel-content {
+  display: none !important;
+}

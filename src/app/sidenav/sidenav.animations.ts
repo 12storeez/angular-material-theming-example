@@ -7,7 +7,7 @@ import {
 } from '@angular/animations';
 
 const SIDENAV_HUGE_SIZE = '280px';
-const SIDENAV_MINI_SIZE = '80px';
+const SIDENAV_MINI_SIZE = '72px';
 
 export const animations = [
   trigger('sidenav-size', [
