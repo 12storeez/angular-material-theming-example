@@ -3,7 +3,6 @@
 @use '~@angular/material/core/theming/theming';
 
 @use '../../mixins' as mixins;
-@use '../../helpers' as helpers;
 @use '../../theming' as custom-theming;
 
 $dark-config: theming.get-color-config(custom-theming.$dark-theme);
@@ -23,6 +22,13 @@ $light-config: theming.get-color-config(custom-theming.$light-theme);
   .mat-list-base .mat-list-item {
     color: map.get($foreground, text);
   }
+
+  @media (hover: none) {
+    .mat-expansion-panel:not(.mat-expanded):not([aria-disabled="true"])
+      .mat-expansion-panel-header:hover {
+      background: map.get($primary, 500);
+    }
+  }
 }
 
 @include mixins.inside-dark-theme {
@@ -39,6 +45,13 @@ $light-config: theming.get-color-config(custom-theming.$light-theme);
   .mat-expansion-panel-body,
   .mat-list-base .mat-list-item {
     color: map.get($foreground, text);
+  }
+
+  @media (hover: none) {
+    .mat-expansion-panel:not(.mat-expanded):not([aria-disabled="true"])
+      .mat-expansion-panel-header:hover {
+      background: map.get($primary, 500);
+    }
   }
 }
 

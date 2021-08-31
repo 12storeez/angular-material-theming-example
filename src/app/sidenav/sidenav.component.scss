@@ -3,7 +3,6 @@
 @use '~@angular/material/core/theming/theming';
 
 @use '../../mixins' as mixins;
-@use '../../helpers' as helpers;
 @use '../../theming' as custom-theming;
 
 $dark-config: theming.get-color-config(custom-theming.$dark-theme);

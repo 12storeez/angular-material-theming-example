@@ -53,10 +53,15 @@
           *ngFor="let option of options"
           mat-list-item
           routerLink="/"
+          [matMenuTriggerFor]="menu"
         >
           <mat-icon aria-hidden="false" aria-label="toggle menu icon">{{
             option.icon
           }}</mat-icon>
+          <mat-menu #menu="matMenu" xPosition="after">
+            <button mat-menu-item>Item 1</button>
+            <button mat-menu-item>Item 2</button>
+          </mat-menu>
         </a>
       </ng-container>
 

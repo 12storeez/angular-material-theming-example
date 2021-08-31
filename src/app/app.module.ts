@@ -17,9 +17,15 @@ import { TableComponent } from './table/table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
-  declarations: [AppComponent, SidenavComponent, AccordionItemComponent, TableComponent],
+  declarations: [
+    AppComponent,
+    SidenavComponent,
+    AccordionItemComponent,
+    TableComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -34,6 +40,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
