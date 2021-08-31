@@ -16,7 +16,6 @@ $_wms-light-primary-palette: (
     700: #baafa9,
   ),
 );
-
 $_wms-light-accent-palette: (
   100: #d2dbd5,
   500: #83a891,
@@ -27,7 +26,6 @@ $_wms-light-accent-palette: (
     700: #d2dbd5,
   ),
 );
-
 $_wms-light-warn-palette: (
   100: #ffd7d7,
   500: #a54545,
@@ -44,11 +42,8 @@ $_wms-light-warn-palette: (
 // Default hues: 500, 100, 700
 $wms-light-primary: mat.define-palette($_wms-light-primary-palette);
 $wms-light-accent: mat.define-palette($_wms-light-accent-palette);
-// The warn palette is optional (defaults to red).
 $wms-light-warn: mat.define-palette($_wms-light-warn-palette);
 
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
 $light-theme: mat.define-light-theme(
   (
     color: (
