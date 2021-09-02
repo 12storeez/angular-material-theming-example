@@ -4,6 +4,21 @@
 
 ## Styling
 
+### Rules
+
+- In custom themed elements if using background-color, font color must be contrast of it.
+
+  ```scss
+  @use '~@angular/material/core/theming/theming';
+
+  .mat-expansion-panel {
+    background-color: theming.get-color-from-palette($primary-palette, 100);
+    color: theming.get-contrast-color-from-palette($primary-palette, 100);
+    // bad
+    // color: white
+  }
+  ```
+
 Dark and light themes used in this example. Theme applying based on the body class:
 
 ```css
@@ -74,6 +89,8 @@ $theme: helpers.set-ground(
 [\_theming\_.scss](./src/_theming_.scss)
 
 #### 1. Create custom `primary`, `accent`, `warn` palettes
+
+[Material tool to get colors](https://material.io/resources/color)
 
 ```scss
 $primary-colors: (
@@ -181,7 +198,6 @@ In our case, we might:
 
 ```scss
 @use 'sass:map';
-@use '~@angular/material' as mat;
 @use '~@angular/material/core/theming/theming';
 
 @use '../../mixins' as mixins;
@@ -194,6 +210,7 @@ $light-config: theming.get-color-config(custom-theming.$light-theme);
   $primary: map.get($light-config, primary);
 
   .mat-drawer {
+    // with scss get from object function
     background-color: map.get($primary, 700);
   }
 }
@@ -202,7 +219,8 @@ $light-config: theming.get-color-config(custom-theming.$light-theme);
   $primary: map.get($dark-config, primary);
 
   .mat-drawer {
-    background-color: map.get($primary, 700);
+    // with material helper function
+    background-color: theming.get-color-from-palette($primary, 700);
   }
 }
 

@@ -1,5 +1,4 @@
 @use 'sass:map';
-@use '~@angular/material' as mat;
 @use '~@angular/material/core/theming/theming';
 
 @use '../../mixins' as mixins;
@@ -10,17 +9,15 @@ $light-config: theming.get-color-config(custom-theming.$light-theme);
 
 @include mixins.inside-light-theme {
   $primary: map.get($light-config, primary);
-  $foreground: map.get($dark-config, foreground);
-  $background: map.get($dark-config, background);
 
   .mat-expansion-panel {
-    background: map.get($primary, 700);
+    background: theming.get-color-from-palette($primary, 100);
   }
   .mat-expansion-panel-header-title,
   .mat-expansion-indicator::after,
   .mat-expansion-panel-body,
   .mat-list-base .mat-list-item {
-    color: map.get($foreground, text);
+    color: theming.get-contrast-color-from-palette($primary, 100);
   }
 
   @media (hover: none) {
@@ -33,18 +30,16 @@ $light-config: theming.get-color-config(custom-theming.$light-theme);
 
 @include mixins.inside-dark-theme {
   $primary: map.get($dark-config, primary);
-  $foreground: map.get($dark-config, foreground);
-  $background: map.get($dark-config, background);
 
   .mat-expansion-panel {
-    background: map.get($primary, 700);
+    background: theming.get-color-from-palette($primary, 700);
   }
 
   .mat-expansion-panel-header-title,
   .mat-expansion-indicator::after,
   .mat-expansion-panel-body,
   .mat-list-base .mat-list-item {
-    color: map.get($foreground, text);
+    color: theming.get-contrast-color-from-palette($primary, 700);
   }
 
   @media (hover: none) {

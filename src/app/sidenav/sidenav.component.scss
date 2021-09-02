@@ -1,5 +1,4 @@
 @use 'sass:map';
-@use '~@angular/material' as mat;
 @use '~@angular/material/core/theming/theming';
 
 @use '../../mixins' as mixins;
@@ -12,7 +11,8 @@ $light-config: theming.get-color-config(custom-theming.$light-theme);
   $primary: map.get($light-config, primary);
 
   .mat-drawer {
-    background-color: map.get($primary, 700);
+    background-color: theming.get-color-from-palette($primary, 100);
+    color: theming.get-contrast-color-from-palette($primary, 100);
   }
 }
 
@@ -20,7 +20,8 @@ $light-config: theming.get-color-config(custom-theming.$light-theme);
   $primary: map.get($dark-config, primary);
 
   .mat-drawer {
-    background-color: map.get($primary, 700);
+    background-color: theming.get-color-from-palette($primary, 700);
+    color: theming.get-contrast-color-from-palette($primary, 700);
   }
 }
 

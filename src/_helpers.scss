@@ -1,9 +1,8 @@
 @use 'sass:map';
-@use 'sass:meta';
 
 /// Merges background or foreground with theme
 /// @param {Map} $theme The theme map returned from `define-light-theme` or `define-dark-theme`.
-/// @param {String} $property-name `background` | 'foreground`
+/// @param {String} $property-name `background` | `foreground`
 /// @param {Map} $settings Map with new settings to override
 ///   Check available settings inside node_modules/@angular/material/core/theming/_palette.scss
 /// @returns {Map} Theme.

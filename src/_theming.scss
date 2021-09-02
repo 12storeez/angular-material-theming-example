@@ -7,33 +7,33 @@ $wms-light-primary-text: #887569;
 
 // Creating custom palettes
 $_wms-light-primary-palette: (
-  100: #baafa9,
+  100: #dac6b3,
   500: #a89583,
-  700: #887569,
+  700: #796756,
   contrast: (
-    100: #887569,
+    100: $dark-primary-text,
     500: $light-primary-text,
-    700: #baafa9,
+    700: $light-primary-text,
   ),
 );
 $_wms-light-accent-palette: (
-  100: #d2dbd5,
+  100: #b3dac1,
   500: #83a891,
-  700: #698874,
+  700: #567963,
   contrast: (
-    100: #698874,
+    100: $dark-primary-text,
     500: $light-primary-text,
-    700: #d2dbd5,
+    700: $light-primary-text,
   ),
 );
 $_wms-light-warn-palette: (
-  100: #ffd7d7,
+  100: #da7370,
   500: #a54545,
-  700: #8d0624,
+  700: #71151e,
   contrast: (
-    100: #8d0624,
-    500: $dark-primary-text,
-    700: #ffd7d7,
+    100: $light-primary-text,
+    500: $light-primary-text,
+    700: $light-primary-text,
   ),
 );
 
